@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <h:head>
+    <title>Login</title>
+    <f:metadata>
+      <f:viewAction action="#{userManagedBean.redirectLogin()}" />
+    </f:metadata>
+  </h:head>
+  <h:body>
+    <h:form>
+      <h:outputLabel value="Username:" for="username"></h:outputLabel><br/>
+      <h:inputText value="#{userManagedBean.username}" id="username"></h:inputText><br/>
+      <h:outputLabel value="Password:" for="password"></h:outputLabel><br/>
+      <h:inputSecret value="#{userManagedBean.password}" id="password"></h:inputSecret><br/>
+      <c:if test="#{userManagedBean.message != null}">
+        <p>
+          #{userManagedBean.message}
+        </p>
+      </c:if>
+      <br/>
+      <h:commandButton value="Login" action="#{userManagedBean.login()}"></h:commandButton>
+    </h:form>
+  </h:body>
+</html>
