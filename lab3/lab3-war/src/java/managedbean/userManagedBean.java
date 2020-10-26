@@ -45,18 +45,18 @@ public class userManagedBean implements Serializable {
     return "welcome?faces-redirect=true";
   }
 
-  public String redirectWelcome() {
-    if (!this.loggedIn) {
-      this.message = "Please login";
-      return "login?faces-redirect=true";
+  public String redirect(String currentView) {
+    if (currentView.equalsIgnoreCase("login")) {
+      if (this.loggedIn) {
+        return "welcome?faces-redirect=true";
+      }
+    } else {
+      if (!this.loggedIn) {
+        this.message = "Please login";
+        return "login?faces-redirect=true";
+      }
     }
-    return null;
-  }
 
-  public String redirectLogin() {
-    if (this.loggedIn) {
-      return "welcome?faces-redirect=true";
-    }
     return null;
   }
 
