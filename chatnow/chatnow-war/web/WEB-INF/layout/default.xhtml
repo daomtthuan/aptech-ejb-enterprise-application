@@ -1,32 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  #{authSession.redirect()}
   <h:head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <h:outputStylesheet name="${config.vendor}/bootstrap/bootstrap.min.css"/>
     <title>
-      Chatnow -
-      <ui:insert name="title" />
+      <ui:insert name="title">
+        #{configApplication.headConfig.title}
+      </ui:insert>
     </title>
+    <meta name="description" content="#{configApplication.headConfig.description}"/>
+    <meta name="author" content="#{configApplication.headConfig.author}"/>
+    <meta name="keywords" content="#{configApplication.headConfig.keywords}"/>
+    <h:outputStylesheet name="/css/bootstrap.css"/>
+    <ui:insert name="style" />
   </h:head>
   <h:body>
-    <main>
-      <ui:include src="${config.component}/navbar.xhtml"/>
-      <div class="container mt-3">
-        <h1 class="text-primary text-center">Chatnow</h1>
-        <h2 class="text-secondary">
-          <ui:insert name="title" />
-        </h2>
-        <hr/>
-        <ui:insert name="content"/>
+    <div id="main">
+      <ui:include src="#{configApplication.directoryConfig.component}/navbar.xhtml"/>
+      <div id="page" class="mt-1">
+        <ui:insert name="page"/>
       </div>
-    </main>
-
-    <h:outputScript name="${config.vendor}/jquery/jquery.min.js" />
-    <h:outputScript name="${config.vendor}/bootstrap/bootstrap.min.js" />
+    </div>
+    <h:outputScript name="/js/jquery.js" />
+    <h:outputScript name="/js/bootstrap.js" />
   </h:body>
 </html>
+

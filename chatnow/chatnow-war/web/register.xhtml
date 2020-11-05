@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <ui:composition template="#{configApplication.directoryConfig.layout}/default.xhtml">
+    <ui:define name="title">
+      #{configApplication.headConfig.title} - Register
+    </ui:define>
+    <ui:define name="page">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-8 col-xl-6 mx-auto">
+            <div class="card border-primary">
+              <div class="card-body">
+                <h2 class="card-title">Register</h2>
+                <p class="card-text card-subtitle">
+                  Or <h:link outcome="login" value="login" /> by your account.
+                </p>
+                <hr />
+                <h:form>
+                  <div class="form-group">
+                    <h:outputLabel value="Username:" for="username" />
+                    <h:inputText id="username" value="#{registerPresenter.username}" label="username" styleClass="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel value="Password:" for="password" />
+                    <h:inputSecret id="password" value="#{registerPresenter.password}" label="password" styleClass="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel value="Re-password:" for="repassword" />
+                    <h:inputSecret id="repassword" value="#{registerPresenter.repassword}" label="repassword" styleClass="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel value="Name:" for="name" />
+                    <h:inputText id="name" value="#{registerPresenter.name}" label="name" styleClass="form-control" />
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="custom-control custom-checkbox">
+                      <h:selectBooleanCheckbox value="#{registerPresenter.accepted}" id="accepted" styleClass="custom-control-input" />
+                      <h:outputLabel value="Accept all our&nbsp;" for="accepted" styleClass="custom-control-label" />
+                      <h:link outcome="terms" value="terms" />.
+                    </div>
+                    <h:commandButton action="#{registerPresenter.register()}" value="Register" styleClass="btn btn-primary" />
+                  </div>
+                </h:form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ui:define>
+  </ui:composition>
+</html>
+

@@ -3,24 +3,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-  <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
-    <h:link styleClass="navbar-brand mb-0 h1" outcome="home">Chatnow</h:link>
+  <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top">
+    <h:link styleClass="navbar-brand font-weight-bolder" outcome="index">Chatnow</h:link>
     <div class="collapse navbar-collapse mt-1">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <h:link styleClass="nav-link" outcome="home">Home</h:link>
+        <li class="nav-item">
+          <h:link styleClass="#{viewApplication.is('index') ? 'nav-link active' : 'nav-link'}" outcome="index">Home</h:link>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <c:choose>
-          <c:when test="${!auth.loggedIn}">
-            <li class="nav-item">
-              <h:link styleClass="nav-link" outcome="login">Login</h:link>
+          <c:when test="#{authSession.loggedIn}">
+            <li class="nav-item dropdown">
+              <button class="btn btn-link nav-link dropdown-toggle" id="account-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                #{authSession.account.username}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="account-dropdown">
+                <a class="dropdown-item" href="#">Account</a>
+                <div class="dropdown-divider"></div>
+                <h:form>
+                  <h:commandLink styleClass="dropdown-item" action="#{authSession.logout()}" value="Logout" />
+                </h:form>
+              </div>
             </li>
           </c:when>
           <c:otherwise>
             <li class="nav-item">
-              <h:link styleClass="btn btn-primary btn-sm" outcome="#{auth.logout()}">Logout</h:link>
+              <h:link styleClass="#{viewApplication.is('register') ? 'nav-link active' : 'nav-link'}" outcome="register" value="Register" />
+            </li>
+            <li class="nav-item m-0">
+              <h:link styleClass="#{viewApplication.is('login') ? 'nav-link active' : 'nav-link'}" outcome="login" value="Login" />
             </li>
           </c:otherwise>
         </c:choose>
@@ -28,3 +40,4 @@
     </div>
   </nav>
 </html>
+

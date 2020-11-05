@@ -4,35 +4,46 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-  <ui:composition template="${config.layout}/default.xhtml">
+  <ui:composition template="#{configApplication.directoryConfig.layout}/default.xhtml">
     <ui:define name="title">
-      Login
+      #{configApplication.headConfig.title} - Login
     </ui:define>
-    <ui:define name="content">
-      <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-          <h:form>
-            <c:if test="${auth.message != null}">
-              <div class="form-group">
-                <div class="alert alert-danger">
-                  ${auth.message}
-                </div>
+    <ui:define name="page">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-8 col-xl-6 mx-auto">
+            <div class="card border-primary">
+              <div class="card-body">
+                <h2 class="card-title">Login</h2>
+                <p class="card-text card-subtitle">
+                  Or <h:link outcome="register" value="register" /> new account.
+                </p>
+                <hr />
+                <h:form>
+                  <c:if test="#{loginPresenter.error}">
+                    <div class="alert alert-danger">
+                      <strong>Login failed!</strong> #{loginPresenter.message}
+                    </div>
+                  </c:if>
+                  <div class="form-group">
+                    <h:outputLabel value="Username:" for="username" />
+                    <h:inputText id="username" value="#{loginPresenter.username}" label="username" styleClass="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <h:outputLabel value="Password:" for="password" />
+                    <h:inputSecret id="password" value="#{loginPresenter.password}" label="password" styleClass="form-control" />
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h:link outcome="reset-password" value="Forget password?" />
+                    <h:commandButton action="#{loginPresenter.login()}" value="Login" styleClass="ml-auto btn btn-primary" />
+                  </div>
+                </h:form>
               </div>
-            </c:if>
-            <div class="form-group">
-              <h:outputLabel for="username" value="Username:" />
-              <h:inputText styleClass="form-control" id="username" value="#{auth.username}"/>
             </div>
-            <div class="form-group">
-              <h:outputLabel for="password" value="Password:" />
-              <h:inputText styleClass="form-control" id="password" value="#{auth.password}"/>
-            </div>
-            <div class="form-group text-center">
-              <h:commandButton styleClass="btn btn-primary" action="${auth.login()}" value="Login"/>
-            </div>
-          </h:form>
+          </div>
         </div>
       </div>
     </ui:define>
   </ui:composition>
 </html>
+
