@@ -47,3 +47,4 @@ insert into permission(account_id, role_id) values
     (1, 2),
     (2, 2),
     (3, 2);
+    

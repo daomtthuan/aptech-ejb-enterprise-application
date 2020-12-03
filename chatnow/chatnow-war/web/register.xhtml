@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
   <ui:composition template="#{configApplication.directoryConfig.layout}/default.xhtml">
     <ui:define name="title">
       #{configApplication.headConfig.title} - Register
@@ -15,10 +16,15 @@
               <div class="card-body">
                 <h2 class="card-title">Register</h2>
                 <p class="card-text card-subtitle">
-                  Or <h:link outcome="login" value="login" /> by your account.
+                  Or <h:link outcome="/login" value="login" /> by your account.
                 </p>
                 <hr />
                 <h:form>
+                  <c:if test="#{registerPresenter.error}">
+                    <div class="alert alert-danger">
+                      <strong>Register failed!</strong> #{registerPresenter.message}
+                    </div>
+                  </c:if>
                   <div class="form-group">
                     <h:outputLabel value="Username:" for="username" />
                     <h:inputText id="username" value="#{registerPresenter.username}" label="username" styleClass="form-control" />
@@ -39,7 +45,7 @@
                     <div class="custom-control custom-checkbox">
                       <h:selectBooleanCheckbox value="#{registerPresenter.accepted}" id="accepted" styleClass="custom-control-input" />
                       <h:outputLabel value="Accept all our&nbsp;" for="accepted" styleClass="custom-control-label" />
-                      <h:link outcome="terms" value="terms" />.
+                      <h:link outcome="/terms" value="terms" />.
                     </div>
                     <h:commandButton action="#{registerPresenter.register()}" value="Register" styleClass="btn btn-primary" />
                   </div>

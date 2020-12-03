@@ -1,4 +1,4 @@
-package com.daomtthuan.chatnow.ejb.entitysessionbean;
+package com.daomtthuan.chatnow.ejb.facade;
 
 import com.daomtthuan.chatnow.ejb.entity.Role;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.ejb.Local;
 @Local
 public interface RoleFacadeLocal {
 
-  void create(Role role);
+  Role create(Role role);
 
   void edit(Role role);
 
@@ -20,5 +20,7 @@ public interface RoleFacadeLocal {
   List<Role> findRange(int[] range);
 
   int count();
+
+  Role findByName(String name);
 
 }

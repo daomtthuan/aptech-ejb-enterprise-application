@@ -12,7 +12,7 @@ public class ViewApplication implements Serializable {
 
   public String getName() {
     String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-    return viewId.substring(1, viewId.length() - 6);
+    return viewId.substring(0, viewId.length() - 6);
   }
 
   public boolean is(String name) {
@@ -20,7 +20,7 @@ public class ViewApplication implements Serializable {
   }
 
   public String getPath(String name) {
-    return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/" + name + ".chatnow";
+    return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + name + ".chatnow";
   }
 
   public void redirect(String name) throws IOException {

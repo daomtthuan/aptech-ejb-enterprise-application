@@ -60,7 +60,7 @@ public class Account implements Serializable {
   @Column(name = "status")
   private boolean status;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
   private Collection<Permission> permissionCollection;
 
   public Account() {

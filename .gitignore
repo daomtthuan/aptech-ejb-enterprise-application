@@ -62,3 +62,6 @@ hs_err_pid*
 /chatnow/chatnow-ejb/build/
 /chatnow/chatnow-war/dist/
 /chatnow/chatnow-war/build/
+/labextra/nbproject/private/
+/labextra/labextra-war/nbproject/private/
+/labextra/labextra-ejb/nbproject/private/

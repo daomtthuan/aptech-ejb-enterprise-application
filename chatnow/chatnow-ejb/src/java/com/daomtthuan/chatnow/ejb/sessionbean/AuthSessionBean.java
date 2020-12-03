@@ -1,7 +1,10 @@
 package com.daomtthuan.chatnow.ejb.sessionbean;
 
 import com.daomtthuan.chatnow.ejb.entity.Account;
-import com.daomtthuan.chatnow.ejb.entitysessionbean.AccountFacadeLocal;
+import com.daomtthuan.chatnow.ejb.entity.Permission;
+import com.daomtthuan.chatnow.ejb.entity.Role;
+import com.daomtthuan.chatnow.ejb.facade.AccountFacadeLocal;
+import com.daomtthuan.chatnow.ejb.facade.RoleFacadeLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
@@ -11,6 +14,9 @@ public class AuthSessionBean implements AuthSessionBeanLocal {
   @EJB
   private AccountFacadeLocal accountFacade;
 
+  @EJB
+  private RoleFacadeLocal roleFacade;
+
   private Account account;
 
   @Override
@@ -18,7 +24,12 @@ public class AuthSessionBean implements AuthSessionBeanLocal {
     Account tempAccount = this.accountFacade.findByUsername(username);
     if (tempAccount != null && tempAccount.getPassword().equals(password)) {
       this.account = tempAccount;
-      return null;
+      for (Permission permission : tempAccount.getPermissionCollection()) {
+        if (permission.getRole().getName().endsWith(Role.USER)) {
+          return null;
+        }
+      }
+      return "Denied login.";
     }
     return "Username or password is wrong.";
   }
@@ -37,6 +48,17 @@ public class AuthSessionBean implements AuthSessionBeanLocal {
   @Override
   public Account getAccount() {
     return this.account;
+  }
+
+  @Override
+  public Boolean isAdmin() {
+    if (this.account != null) {
+      Role adminRole = this.roleFacade.findByName(Role.ADMIN);
+      if (this.account.getPermissionCollection().stream().anyMatch(permission -> (permission.getRole().equals(adminRole)))) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

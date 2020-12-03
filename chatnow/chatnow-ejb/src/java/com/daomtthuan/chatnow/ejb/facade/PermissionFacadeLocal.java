@@ -1,4 +1,4 @@
-package com.daomtthuan.chatnow.ejb.entitysessionbean;
+package com.daomtthuan.chatnow.ejb.facade;
 
 import com.daomtthuan.chatnow.ejb.entity.Permission;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.ejb.Local;
 @Local
 public interface PermissionFacadeLocal {
 
-  void create(Permission permission);
+  Permission create(Permission permission);
 
   void edit(Permission permission);
 

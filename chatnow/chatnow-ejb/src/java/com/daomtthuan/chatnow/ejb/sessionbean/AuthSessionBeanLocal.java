@@ -14,5 +14,7 @@ public interface AuthSessionBeanLocal {
 
   Account getAccount();
 
+  Boolean isAdmin();
+
 }
 

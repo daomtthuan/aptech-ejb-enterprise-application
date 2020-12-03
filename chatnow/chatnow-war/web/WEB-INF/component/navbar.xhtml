@@ -4,11 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
   <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top">
-    <h:link styleClass="navbar-brand font-weight-bolder" outcome="index">Chatnow</h:link>
+    <h:link styleClass="navbar-brand font-weight-bolder" outcome="/index">Chatnow</h:link>
     <div class="collapse navbar-collapse mt-1">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <h:link styleClass="#{viewApplication.is('index') ? 'nav-link active' : 'nav-link'}" outcome="index">Home</h:link>
+          <h:link styleClass="#{viewApplication.is('index') ? 'nav-link active' : 'nav-link'}" outcome="/index">
+            <i class="fas fa-home"></i>
+            Home
+          </h:link>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -20,6 +23,9 @@
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="account-dropdown">
                 <a class="dropdown-item" href="#">Account</a>
+                <c:if test="#{authSession.admin}">
+                  <h:link styleClass="dropdown-item" outcome="/dashboard" value="Dashboard" />
+                </c:if>
                 <div class="dropdown-divider"></div>
                 <h:form>
                   <h:commandLink styleClass="dropdown-item" action="#{authSession.logout()}" value="Logout" />
@@ -29,10 +35,10 @@
           </c:when>
           <c:otherwise>
             <li class="nav-item">
-              <h:link styleClass="#{viewApplication.is('register') ? 'nav-link active' : 'nav-link'}" outcome="register" value="Register" />
+              <h:link styleClass="#{viewApplication.is('register') ? 'nav-link active' : 'nav-link'}" outcome="/register" value="Register" />
             </li>
             <li class="nav-item m-0">
-              <h:link styleClass="#{viewApplication.is('login') ? 'nav-link active' : 'nav-link'}" outcome="login" value="Login" />
+              <h:link styleClass="#{viewApplication.is('login') ? 'nav-link active' : 'nav-link'}" outcome="/login" value="Login" />
             </li>
           </c:otherwise>
         </c:choose>

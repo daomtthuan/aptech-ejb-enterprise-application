@@ -1,4 +1,4 @@
-package com.daomtthuan.chatnow.ejb.entitysessionbean;
+package com.daomtthuan.chatnow.ejb.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,8 +13,10 @@ public abstract class AbstractFacade<T> {
 
   protected abstract EntityManager getEntityManager();
 
-  public void create(T entity) {
+  public T create(T entity) {
     this.getEntityManager().persist(entity);
+    this.getEntityManager().flush();
+    return entity;
   }
 
   public void edit(T entity) {

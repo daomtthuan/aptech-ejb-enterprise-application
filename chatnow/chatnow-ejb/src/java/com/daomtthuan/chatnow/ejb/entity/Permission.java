@@ -31,22 +31,22 @@ public class Permission implements Serializable {
 
   @JoinColumn(name = "account_id", referencedColumnName = "id")
   @ManyToOne(optional = false)
-  private Account accountId;
+  private Account account;
 
   @JoinColumn(name = "role_id", referencedColumnName = "id")
   @ManyToOne(optional = false)
-  private Role roleId;
+  private Role role;
 
   public Permission() {
     this.id = null;
-    this.accountId = null;
-    this.roleId = null;
+    this.account = null;
+    this.role = null;
   }
 
-  public Permission(Account accountId, Role roleId) {
+  public Permission(Account account, Role role) {
     this.id = null;
-    this.accountId = accountId;
-    this.roleId = roleId;
+    this.account = account;
+    this.role = role;
   }
 
   public Long getId() {
@@ -57,20 +57,20 @@ public class Permission implements Serializable {
     this.id = id;
   }
 
-  public Account getAccountId() {
-    return this.accountId;
+  public Account getAccount() {
+    return this.account;
   }
 
-  public void setAccountId(Account accountId) {
-    this.accountId = accountId;
+  public void setAccount(Account account) {
+    this.account = account;
   }
 
-  public Role getRoleId() {
-    return this.roleId;
+  public Role getRole() {
+    return this.role;
   }
 
-  public void setRoleId(Role roleId) {
-    this.roleId = roleId;
+  public void setRole(Role role) {
+    this.role = role;
   }
 
   @Override
@@ -89,7 +89,7 @@ public class Permission implements Serializable {
     if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
       return false;
     }
-    return this.accountId.equals(other.accountId) && this.roleId.equals(other.roleId);
+    return this.account.equals(other.account) && this.role.equals(other.role);
   }
 
 }

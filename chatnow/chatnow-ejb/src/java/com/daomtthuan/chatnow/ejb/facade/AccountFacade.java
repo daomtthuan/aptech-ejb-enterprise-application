@@ -1,4 +1,4 @@
-package com.daomtthuan.chatnow.ejb.entitysessionbean;
+package com.daomtthuan.chatnow.ejb.facade;
 
 import com.daomtthuan.chatnow.ejb.entity.Account;
 import java.util.List;

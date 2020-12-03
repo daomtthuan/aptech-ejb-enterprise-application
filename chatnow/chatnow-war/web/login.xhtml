@@ -16,7 +16,7 @@
               <div class="card-body">
                 <h2 class="card-title">Login</h2>
                 <p class="card-text card-subtitle">
-                  Or <h:link outcome="register" value="register" /> new account.
+                  Or <h:link outcome="/register" value="register" /> new account.
                 </p>
                 <hr />
                 <h:form>
@@ -34,7 +34,7 @@
                     <h:inputSecret id="password" value="#{loginPresenter.password}" label="password" styleClass="form-control" />
                   </div>
                   <div class="d-flex align-items-center justify-content-between">
-                    <h:link outcome="reset-password" value="Forget password?" />
+                    <h:link outcome="/reset-password" value="Forget password?" />
                     <h:commandButton action="#{loginPresenter.login()}" value="Login" styleClass="ml-auto btn btn-primary" />
                   </div>
                 </h:form>

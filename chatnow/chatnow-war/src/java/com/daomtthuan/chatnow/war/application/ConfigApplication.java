@@ -3,6 +3,7 @@ package com.daomtthuan.chatnow.war.application;
 import com.daomtthuan.chatnow.war.application.config.DirectoryConfig;
 import com.daomtthuan.chatnow.war.application.config.HeadConfig;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 
@@ -10,10 +11,11 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class ConfigApplication implements Serializable {
 
-  private final HeadConfig headConfig;
-  private final DirectoryConfig directoryConfig;
+  private HeadConfig headConfig;
+  private DirectoryConfig directoryConfig;
 
-  public ConfigApplication() {
+  @PostConstruct
+  public void initialize() {
     this.headConfig = new HeadConfig("Chatnow", "Chat enterprise web-application", "Daomtthuan", "daomtthuan, chat, ejb, java, jsf");
     this.directoryConfig = new DirectoryConfig("/WEB-INF/layout", "/WEB-INF/component");
   }

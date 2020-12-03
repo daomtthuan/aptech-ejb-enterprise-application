@@ -26,7 +26,7 @@ public class AuthSession implements Serializable {
 
   public String logout() {
     if (this.authSessionBean.logount() != null) {
-      return "login?faces-redirect=true";
+      return "/login?faces-redirect=true";
     }
     return null;
   }
@@ -39,13 +39,24 @@ public class AuthSession implements Serializable {
     return this.authSessionBean.getAccount();
   }
 
+  public boolean isAdmin() {
+    return this.authSessionBean.isAdmin();
+  }
+
   public void redirect() throws IOException {
-    if (this.authSessionBean.isLoggedIn()
-            && (this.viewApplication.is("login") || this.viewApplication.is("register"))) {
-      this.viewApplication.redirect("account");
-    } else if (!this.authSessionBean.isLoggedIn()
-            && this.viewApplication.is("account")) {
-      this.viewApplication.redirect("login");
+    if (this.authSessionBean.isLoggedIn()) {
+      if (this.viewApplication.is("/login") || this.viewApplication.is("/register")) {
+        this.viewApplication.redirect("/account");
+        return;
+      }
+
+      if (!this.authSessionBean.isAdmin() && this.viewApplication.getName().startsWith("/dashboard")) {
+        this.viewApplication.redirect("/index");
+      }
+    } else {
+      if (this.viewApplication.is("/account") || this.viewApplication.is("/dashboard")) {
+        this.viewApplication.redirect("/login");
+      }
     }
   }
 

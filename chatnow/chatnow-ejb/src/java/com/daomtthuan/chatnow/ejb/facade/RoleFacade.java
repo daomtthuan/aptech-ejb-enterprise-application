@@ -1,6 +1,7 @@
-package com.daomtthuan.chatnow.ejb.entitysessionbean;
+package com.daomtthuan.chatnow.ejb.facade;
 
 import com.daomtthuan.chatnow.ejb.entity.Role;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,15 @@ public class RoleFacade extends AbstractFacade<Role> implements RoleFacadeLocal 
 
   public RoleFacade() {
     super(Role.class);
+  }
+
+  @Override
+  public Role findByName(String name) {
+    List<Role> roles = this.entityManager.createNamedQuery("Role.findByName").setParameter("name", name).getResultList();
+    if (roles.isEmpty()) {
+      return null;
+    }
+    return roles.get(0);
   }
 
 }

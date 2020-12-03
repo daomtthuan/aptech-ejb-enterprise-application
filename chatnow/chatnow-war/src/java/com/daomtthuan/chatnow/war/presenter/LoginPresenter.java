@@ -2,6 +2,7 @@ package com.daomtthuan.chatnow.war.presenter;
 
 import com.daomtthuan.chatnow.war.session.AuthSession;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -18,7 +19,8 @@ public class LoginPresenter implements Serializable {
   private boolean error;
   private String message;
 
-  public LoginPresenter() {
+  @PostConstruct
+  public void initialize() {
     this.username = null;
     this.password = null;
     this.error = false;
@@ -26,13 +28,19 @@ public class LoginPresenter implements Serializable {
   }
 
   public String login() {
-    this.message = authSession.login(this.username, this.password);
+    if (this.username == null || this.username.isEmpty()) {
+      this.message = "Username is empty";
+    } else if (this.password == null || this.password.isEmpty()) {
+      this.message = "Password is empty";
+    } else {
+      this.message = authSession.login(this.username, this.password);
+    }
     this.error = this.message != null;
 
     if (this.error) {
       return null;
     }
-    return "index?faces-redirect=true";
+    return "/index?faces-redirect=true";
   }
 
   public String getUsername() {

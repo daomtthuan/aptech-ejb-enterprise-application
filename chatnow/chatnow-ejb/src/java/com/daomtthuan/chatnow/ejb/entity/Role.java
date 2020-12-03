@@ -28,6 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
   @NamedQuery(name = "Role.findByStatus", query = "SELECT r FROM Role r WHERE r.status = :status")})
 public class Role implements Serializable {
 
+  public static final String ADMIN = "admin";
+  public static final String USER = "user";
+
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +49,7 @@ public class Role implements Serializable {
   @Column(name = "status")
   private boolean status;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
   private Collection<Permission> permissionCollection;
 
   public Role() {
